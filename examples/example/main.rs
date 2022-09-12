@@ -225,13 +225,13 @@ impl App {
             let extension_names = enumerate_required_extensions(&window)?;
             let mut extension_names = extension_names
                 .iter()
-                .map(|name| name.as_ptr())
+                .map(|name| *name)
                 .collect::<Vec<_>>();
             if ENABLE_VALIDATION_LAYERS {
                 extension_names.push(DebugUtils::name().as_ptr());
             }
 
-            // layer for validation
+            // layer for validations
             let enabled_layer_names = VALIDATION
                 .iter()
                 .map(|layer_name| CString::new(*layer_name).unwrap())
